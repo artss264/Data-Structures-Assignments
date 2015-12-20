@@ -1,0 +1,85 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+#include<string.h>
+
+int main()
+{
+    char arr[10000][100],p,q;
+    int i,j,k,m,l,first,last,N,n;
+    scanf("%d",&N);
+    scanf("%c",&p);
+    first=0;
+    last=0;
+    while(p!='Q')
+    {
+        if(p=='A')
+        {
+            scanf("%d",&n);
+            if(n<=N-first)
+            {
+                for(i=first;i<first+n;i++)
+                {
+                    scanf("%s",&arr[i]);
+                    k=first;
+                    if(first+n>N-1)
+                        first=N-(first+n);
+                    last=k+n-1;
+                }
+            }
+            else
+            {
+                for(i=first;i<N;i++)
+                    scanf("%s",&arr[i]);
+                for(i=0;i<n-(N-first);i++)
+                {
+                    scanf("%s",&arr[i]);
+                }
+                k=first;
+                first=n-(N-first);
+                if(n-(N-k)-1<0)
+                    last=N-1;
+                else
+                    last=n-(N-k)-1;
+            }
+
+        }
+        if(p=='R')
+        {
+            scanf("%d",&n);
+            if(n<=N-first)
+            {
+//                for(i=first;i<first+n;i++)
+  //                  &arr[i][0]='';
+                if(first+n>N)
+                    first=0;
+                else
+                    first=first+n;
+            }
+            else
+            {
+    //            for(i=first;i<N;i++)
+      //              &arr[i][0]='';
+  //              for(i=0;i<n-(N-first);i++)
+//                    &arr[i][0]='';
+                first=n-(N-first);
+            }
+        }
+        if(p=='L')
+        {
+            if(first<last)
+            {
+                for(i=first;i<last+1;i++)
+                    printf("%s\n",*arr[i]);
+            }
+            else
+            {
+                for(i=first;i<N;i++)
+                    printf("%s\n",*arr[i]);
+                for(i=0;i<last+1;i++)
+                    printf("%s\n",*arr[i]);
+            }
+        }
+    }
+    return 0;
+}
